@@ -28,6 +28,8 @@ app.post("/form", async (req, res) => {
 
     const response = await mailersend.email.send(Emailparametres);
 
+    console.log(response);
+
     res.status(200).json("OK");
   } catch (error) {
     console.error("Erreur :", error);
