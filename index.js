@@ -15,7 +15,7 @@ app.post("/form", async (req, res) => {
     const mailersend = new MailerSend({
       apiKey: process.env.MAILERSEND_API_KEY,
     });
-    const sentFrom = new Sender("MS_h2z0md@process.env.DOMAIN", "Rom");
+    const sentFrom = new Sender(`MS_h2z0md@${process.env.DOMAIN}`, "Rom");
     const recipient = [new Recipient(email, firstname)];
     const messObjet = "Mail test Trip";
 
@@ -26,7 +26,7 @@ app.post("/form", async (req, res) => {
       .setHtml("<strong>" + sujet + "</strong>")
       .setText(sujet);
 
-    const response = await MailerSend.email.send(Emailparametres);
+    const response = await mailersend.email.send(Emailparametres);
 
     res.status(200).json("OK");
   } catch (error) {
