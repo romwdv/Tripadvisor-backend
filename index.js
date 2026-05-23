@@ -25,13 +25,13 @@ app.post("/form", async (req, res) => {
     const recipient = [new Recipient(email, firstname)];
     const messObjet = "Mail test Trip";
 
-    const Emailparams = new EmailParams()
+    const Emailparametres = new EmailParams()
       .setFrom(sentFrom)
       .setTo(recipient)
       .setSubject(messObjet)
       .setText(sujet);
 
-    const response = await MailerSend.email.send(Emailparams);
+    const response = await MailerSend.email.send(Emailparametres);
 
     res.status(200).json("OK");
   } catch (error) {
