@@ -1,12 +1,6 @@
 import express from "express";
 import cors from "cors";
-import {
-  MailerSend,
-  EmailParams,
-  Sender,
-  Recipient,
-  EmailParams,
-} from "mailersend";
+import { MailerSend, Sender, Recipient, EmailParams } from "mailersend";
 import "dotenv/config";
 
 const app = express();
