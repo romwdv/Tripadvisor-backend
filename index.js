@@ -16,7 +16,7 @@ app.post("/form", async (req, res) => {
       apiKey: process.env.MAILERSEND_API_KEY,
     });
     const sentFrom = new Sender(`MS_h2z0md@${process.env.DOMAIN}`, "MS_h2z0md");
-    const recipient = [new Recipient(email, firstname)];
+    const recipient = [new Recipient(email)];
     const messObjet = "Mail test Trip";
 
     const Emailparametres = new EmailParams()
