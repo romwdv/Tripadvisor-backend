@@ -26,6 +26,7 @@ app.post("/form", async (req, res) => {
       .setFrom(sentFrom)
       .setTo(recipient)
       .setSubject(messObjet)
+      .setHtml("<strong>" + sujet + "</strong>")
       .setText(sujet);
 
     const response = await MailerSend.email.send(Emailparametres);
