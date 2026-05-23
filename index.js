@@ -31,6 +31,8 @@ app.post("/form", async (req, res) => {
       .setSubject(messObjet)
       .setText(sujet);
 
+    console.log(Emailparametres);
+
     const response = await MailerSend.email.send(Emailparametres);
 
     res.status(200).json("OK");
