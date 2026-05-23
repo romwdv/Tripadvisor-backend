@@ -15,7 +15,10 @@ app.post("/form", async (req, res) => {
     const mailersend = new MailerSend({
       apiKey: process.env.MAILERSEND_API_KEY,
     });
-    const sentFrom = new Sender("testrom@free.fr", "Rom");
+    const sentFrom = new Sender(
+      "you@test-ywj2lpn52dpg7oqz.mlsender.net",
+      "Rom",
+    );
     const recipient = [new Recipient(email, firstname)];
     const messObjet = "Mail test Trip";
 
@@ -24,8 +27,6 @@ app.post("/form", async (req, res) => {
       .setTo(recipient)
       .setSubject(messObjet)
       .setText(sujet);
-
-    console.log(Emailparametres);
 
     const response = await MailerSend.email.send(Emailparametres);
 
