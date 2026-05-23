@@ -1,6 +1,12 @@
 import express from "express";
 import cors from "cors";
-import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
+import {
+  MailerSend,
+  EmailParams,
+  Sender,
+  Recipient,
+  EmailParams,
+} from "mailersend";
 import "dotenv/config";
 
 const app = express();
@@ -8,11 +14,28 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.post("/form", (req, res) => {
+app.post("/form", async (req, res) => {
   try {
+    const { firstname, lastname, email, sujet } = req.body;
     console.log(req.body);
+    const mailersend = new MailerSend({
+      apiKey: process.env.MAILERSEND_API_KEY,
+    });
+    const sentFrom = new Sender("testrom@free.fr", "Rom");
+    const recipient = [new Recipient(email, firstname)];
+    const messObjet = "Mail test Trip";
+
+    const Emailparams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo(recipient)
+      .setSubject(messObjet)
+      .setText(sujet);
+
+    const response = await MailerSend.email.send(Emailparams);
+
     res.status(200).json("OK");
   } catch (error) {
+    console.error("Erreur :", error);
     res.status(500).json(error.message);
   }
 });
@@ -21,10 +44,11 @@ app.all(/.*/, (req, res) => {
   try {
     res.status(404).json("Not found");
   } catch (error) {
+    console.error("Erreur :", error);
     res.status(500).json(error.message);
   }
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Serveur On 🚀");
 });
